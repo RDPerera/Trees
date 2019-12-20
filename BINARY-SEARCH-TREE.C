@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include<stdlib.h>
 
 struct node
 {
@@ -37,7 +38,7 @@ struct node *insert(int val)
             else
                 ptr = ptr->left;
         }
-        ptr = reateTree(val);
+        ptr = createTree(val);
         if (prePtr->data > val)
             prePtr->left = ptr;
         else
@@ -48,7 +49,7 @@ struct node *insert(int val)
 
 void display(struct node *tree)
 {
-    if (tree=NULL)
+    if (tree==NULL)
     {
         return;
     }
@@ -56,9 +57,26 @@ void display(struct node *tree)
     printf(" %d ",tree->data);
     display(tree->right);
 }
+struct node * search(struct node * tree,int val)
+{
+    if (tree==NULL)
+    {
+        return 0;
+    }
+    if (tree->data==val)
+    {
+        return tree;
+    }
+    search(tree->left,val);
+    search(tree->right,val);
+}
 int main()
 {
     bst=insert(10);
-    
+    insert(20);
+    insert(30);
+    display(bst);
+    struct node  * add=search(bst,10);
+    printf("%d",add->data);
     return 0;
 }
